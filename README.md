@@ -13,15 +13,16 @@ We value effort more than the perfect skills. Do your best effort to solve the t
 **Important node: After complete the tasks, make a PR to this repository to submit your work.**
 
 ## Front-end: React component
-Write a Dropdown component with the following behaviors:
+Create a Dropdown component with the following behaviors:
 - Open dropdown when click to component
 - Close dropdown when click outside
 - Use scss/sass module to create default style
 - Allow override style by injecting style into component
 - Allow custom renderer for each dropdown line
 - Allow custom renderer for each active dropdown line
+- If you can, try to use, useRef, useImperativeHandle and react Portal to demonstrate your ability to optimize and reduce render call and principle of abstraction and Encapsulation of the component.
 
-Write your code in `packages/frontend/index.js`
+**Task:** Write your code in `packages/frontend` folder
 
 ## Back-end: Low-level implementation
 Decode an IOStream dump stored in [data.tcp](packages/backend/data.tcp) using the following specification:
@@ -34,7 +35,7 @@ Decode an IOStream dump stored in [data.tcp](packages/backend/data.tcp) using th
   - Tag "9": message body length, exclude the length of "8" and "9" field. For example: `"8=FIX4.4<DELIMITER>9=4<DELIMITER>35=A"` means the body is `"35=A"` and contains 4 ascii bytes.
 - The TCP dump may contain noise data between messages. Filter those noise to make sure you read the messages properly.
 
-Task: write a function named `decodeMsg` in `packages/backend/index.js` that read the IOStream dump and return an array of decoded message in the form of key-value pair. 
+**Task:** write a function named `decodeMsg` in `packages/backend/index.js` that read the IOStream dump and return an array of decoded message in the form of key-value pair. 
 
 For example: `"8=FIX4.4<DELIMITER>9=4<DELIMITER>35=A"` will return
 ```javascript

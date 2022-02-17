@@ -1,2 +1,0 @@
-## Message format
-The message is delivered in ascii binary form. Each message contains key-value pair in format `<TAG>=<VALUE>`. Each key-value pair is separated by <DELIMITER>, which is ascii character position 1.
