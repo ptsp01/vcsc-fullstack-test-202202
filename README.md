@@ -26,9 +26,9 @@ Create a Dropdown component with the following behaviors:
 
 ## Back-end: Low-level implementation
 Decode an IOStream dump stored in [data.tcp](packages/backend/data.tcp) using the following specification:
-- The IOStream dump contains several package data received via TCP.
-- Each line contains one package
-- One or several packages construct to a message
+- The IOStream dump contains several packet data received via TCP.
+- Each line contains one packet data
+- One or several packet data construct to a message
 - The message is delivered in ASCII binary form. Each message contains key-value pair (field) in format `<TAG>=<VALUE>`. Each key-value pair is separated by `<DELIMITER>`, which is ASCII character position 1.
 - There are 2 special tags that always appear at the beginning of the message:
   - Tag "8": begin of the message
