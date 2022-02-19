@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "./lib/Dropdown";
-import DdHeader from "./lib/Dropdown/DdHeader";
-import DbItem from "./lib/Dropdown/DdItem";
+import DHeader from "./lib/Dropdown/DHeader";
+import DItem from "./lib/Dropdown/DItem";
 
 import "./styles/app.scss"
 
@@ -35,9 +35,9 @@ function App() {
   return (
     <div className="App">
       <div className="component">
-      <Dropdown header={<DdHeader>Vo Thanh Trung is select value</DdHeader>} >
+      <Dropdown header={<DHeader>Vo Thanh Trung is select value</DHeader>} >
         {
-          location.map((item, index) => <DbItem key={index}>{item.label}</DbItem>)
+          location.map((item, index) => <DItem key={index}>{item.label}</DItem>)
         }
       </Dropdown>
       </div>

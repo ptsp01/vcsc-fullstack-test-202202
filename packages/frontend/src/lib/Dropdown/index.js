@@ -1,5 +1,5 @@
 import React from "react";
-import { DbContext } from "./DbContext"
+import { DContext } from "./DContext"
 
 import "./style.scss"
 
@@ -7,7 +7,7 @@ import "./style.scss"
 
 export default function Dropdown ({ header, children }) {
   const [isExpand, setExpand] = React.useState(false);
-  const dbRef = React.useRef();
+  const dRef = React.useRef();
 
   const toggleExpand = (val) => {
     if (typeof val !== "number") {
@@ -18,7 +18,7 @@ export default function Dropdown ({ header, children }) {
   }
 
   const handleClickOutside = (e) => {
-    const isOutside = !dbRef.current?.contains(e.target);
+    const isOutside = !dRef.current?.contains(e.target);
     if (isOutside) {
       toggleExpand(0);
     }
@@ -30,13 +30,13 @@ export default function Dropdown ({ header, children }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return<DbContext.Provider value={{ isExpand, toggleExpand }}>
-      <div ref={dbRef} className='dropdown' onClick={toggleExpand} >
+  return<DContext.Provider value={{ isExpand, toggleExpand }}>
+      <div ref={dRef} className='dropdown' onClick={toggleExpand} >
         {header}
 
-        <ul className={`dd-content ${isExpand ? 'expand': ''}`} >
+        <ul className={`content ${isExpand ? 'expand': ''}`} >
           {children}
         </ul>
       </div>
-    </DbContext.Provider>
+    </DContext.Provider>
 }

@@ -10,7 +10,7 @@
     border-radius: $round-md;
     cursor: pointer;
   }
-  ul.dd-content {
+  ul.content {
     display: none;
     width: 100%;
     top: 100%;
@@ -30,7 +30,7 @@
       display: block;
     }
   }
-  li.db-item {
+  li.item {
     padding: $space-sm $space-md;
     cursor: pointer;
     &:hover {
