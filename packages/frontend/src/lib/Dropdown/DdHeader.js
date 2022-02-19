@@ -1,5 +1,5 @@
 export default function DdHeader({ children }) {
-  return <div>
+  return <div className="header">
     {children}
   </div>
 }
