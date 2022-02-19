@@ -1,8 +1,6 @@
 import React from "react";
 import { EMPTY } from "./constant";
 import Dropdown from "./lib/Dropdown";
-import DHeader from "./lib/Dropdown/DHeader";
-import DItem from "./lib/Dropdown/DItem";
 
 import "./styles/app.scss"
 
@@ -47,14 +45,14 @@ function App() {
           onSelect={onSelect}
           label="Survey"
           header={
-            <DHeader>
-              {value ? `I want to go to ${value}` : 'Where do you want to travel'}
-            </DHeader>
+            <Dropdown.Header>
+              {value ? `I want to go to ${value}` : 'Where do you want to travel?'}
+            </Dropdown.Header>
           } 
         >
           {
             location.map((item, index) => 
-              <DItem key={index} value={item.value} >{item.label}</DItem>
+              <Dropdown.Item key={index} value={item.value} >{item.label}</Dropdown.Item>
             )
           }
         </Dropdown>

@@ -1,4 +1,6 @@
 import React from "react";
+import DHeader from "./DHeader";
+import DItem from "./DItem";
 import { EMPTY } from "../../constant";
 import { DContext } from "./DContext"
 
@@ -6,7 +8,7 @@ import "./style.scss"
 
 
 
-export default function Dropdown ({ header, children, onSelect, label }) {
+function Dropdown ({ header, children, onSelect, label }) {
   const [isExpand, setExpand] = React.useState(false);
   const dRef = React.useRef();
 
@@ -43,3 +45,8 @@ export default function Dropdown ({ header, children, onSelect, label }) {
       </div>
     </DContext.Provider>
 }
+
+export default Object.assign(Dropdown, {
+  Header: DHeader,
+  Item: DItem
+})
