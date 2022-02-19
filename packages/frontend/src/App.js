@@ -35,9 +35,11 @@ function App() {
   return (
     <div className="App">
       <div className="component">
-      <Dropdown header={<DHeader>Vo Thanh Trung is select value</DHeader>} >
+      <Dropdown onSelect={(v) => console.log(v)} header={<DHeader>Vo Thanh Trung is select value</DHeader>} >
         {
-          location.map((item, index) => <DItem key={index}>{item.label}</DItem>)
+          location.map((item, index) => 
+            <DItem key={index} value={item.value} >{item.label}</DItem>
+          )
         }
       </Dropdown>
       </div>

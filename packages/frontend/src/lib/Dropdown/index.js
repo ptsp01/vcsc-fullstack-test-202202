@@ -5,7 +5,7 @@ import "./style.scss"
 
 
 
-export default function Dropdown ({ header, children }) {
+export default function Dropdown ({ header, children, onSelect }) {
   const [isExpand, setExpand] = React.useState(false);
   const dRef = React.useRef();
 
@@ -30,7 +30,7 @@ export default function Dropdown ({ header, children }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return<DContext.Provider value={{ isExpand, toggleExpand }}>
+  return<DContext.Provider value={{ onSelect }}>
       <div ref={dRef} className='dropdown' onClick={toggleExpand} >
         {header}
 
