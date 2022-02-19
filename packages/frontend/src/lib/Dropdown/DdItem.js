@@ -1,5 +1,7 @@
+import "./style.scss";
+
 export default function DbItem({ children }) {
-  return <li>
+  return <li className="db-item" >
     {children}
   </li>
 }

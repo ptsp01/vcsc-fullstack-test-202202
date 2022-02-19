@@ -34,7 +34,7 @@ export default function Dropdown ({ header, children }) {
       <div ref={dbRef} className='dropdown' onClick={toggleExpand} >
         {header}
 
-        <ul className={`dropdown-content ${isExpand ? 'expand': ''}`} >
+        <ul className={`dd-content ${isExpand ? 'expand': ''}`} >
           {children}
         </ul>
       </div>

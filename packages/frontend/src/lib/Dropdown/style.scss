@@ -1,26 +1,41 @@
+@use "../../styles/common" as *;
+
 .dropdown {
   position: relative;
   display: inline-block;
   min-width: 160px;
   .header {
-    background-color: aquamarine;
+    padding: $space-sm $space-md;
+    border: $line-lg solid $blue-color;
+    border-radius: $round-md;
+    cursor: pointer;
   }
-  ul.dropdown-content {
+  ul.dd-content {
     display: none;
     width: 100%;
     top: 100%;
     position: absolute;
 
     margin: 0;
-    padding: 0;
+    padding: $space-sm 0;
+    border-radius: $round-md;
+    box-sizing: border-box;
     list-style: none;
     
-    background-color: #f1f1f1;
+    background-color: $white-color;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     &.expand {
       display: block;
+    }
+  }
+  li.db-item {
+    padding: $space-sm $space-md;
+    cursor: pointer;
+    &:hover {
+      background-color: $bg-color;
+      text-align: center;
     }
   }
 }
