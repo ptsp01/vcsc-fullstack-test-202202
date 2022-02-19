@@ -1,0 +1,25 @@
+@use 'common' as *;
+
+.App {
+  margin-top: $space-lg;
+  padding: $space-lg;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  border: $line-sm solid $black-color;
+  border-radius: $round-lg;
+  .component, .document {
+    width: 100%;
+    @media screen and (min-width: 700px) {
+      width: 50%;
+    }
+  }
+  .document {
+    h3 {
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
