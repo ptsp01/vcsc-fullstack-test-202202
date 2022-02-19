@@ -50,11 +50,14 @@ function App() {
             </Dropdown.Header>
           } 
         >
-          {
-            location.map((item, index) => 
-              <Dropdown.Item key={index} value={item.value} >{item.label}</Dropdown.Item>
-            )
-          }
+          {location.map((item, index) => 
+            <Dropdown.Item 
+              key={index} 
+              value={item.value} 
+            >
+              {item.label}
+            </Dropdown.Item>
+          )}
         </Dropdown>
       </div>
       <div className="document" >

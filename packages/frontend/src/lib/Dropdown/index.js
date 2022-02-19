@@ -35,12 +35,12 @@ function Dropdown ({ header, children, onSelect, label }) {
 
   return<DContext.Provider value={{ onSelect }}>
       <div ref={dRef} className='dropdown' onClick={toggleExpand} >
-        {label && <label className="label" >{label}</label>}
+        { label && <label className="label" >{label}</label> }
 
-        {header}
+        { header }
 
         <ul className={`content ${isExpand ? 'expand': EMPTY}`} >
-          {children}
+          { children }
         </ul>
       </div>
     </DContext.Provider>
