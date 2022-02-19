@@ -4,21 +4,12 @@
   position: relative;
   display: inline-block;
   min-width: 160px;
-  .label {
-    display: block;
-    font-size: $font-sm;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: $space-sm;
-    background-color: $white-color;
-    padding: 0 $space-sm;
-    transform: translate(0, -50%);
-  }
   .header {
     padding: $space-sm $space-md;
     border: $line-lg solid $blue-color;
     border-radius: $round-md;
+    background-color: $blue-color;
+    color: $white-color;
     cursor: pointer;
   }
   ul.content {
@@ -43,9 +34,12 @@
   }
   li.item {
     padding: $space-sm $space-md;
+    background-color: $white-color;
+    // color: $white-color;
     cursor: pointer;
-    &:hover {
-      background-color: $bg-color;
+    &:hover, &.active {
+      background-color: $blue-color;
+      color: $white-color;
       text-align: center;
     }
   }

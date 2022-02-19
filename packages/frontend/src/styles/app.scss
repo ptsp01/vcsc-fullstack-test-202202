@@ -10,6 +10,7 @@
   max-width: 1000px;
   border: $line-sm solid $black-color;
   border-radius: $round-lg;
+  background-color: $bg-color;
   .component, .document {
     width: 100%;
     @media screen and (min-width: 700px) {

@@ -51,7 +51,8 @@ function App() {
           } 
         >
           {location.map((item, index) => 
-            <Dropdown.Item 
+            <Dropdown.Item
+              isActive={value === item.value}
               key={index} 
               value={item.value} 
             >
