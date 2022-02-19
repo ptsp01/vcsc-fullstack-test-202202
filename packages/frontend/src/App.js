@@ -34,8 +34,8 @@ const location = [
 function App() {
   const [value, setValue] = React.useState(EMPTY);
 
-  const onSelect = (v) => {
-    setValue(v);
+  const onSelect = (item) => {
+    setValue(item.value);
   }
 
   return (
@@ -60,7 +60,7 @@ function App() {
             <Dropdown.Item
               isActive={value === item.value}
               key={item.value} 
-              value={item.value}
+              item={item}
               style={{ backgroundColor: "#df94f6", color: "white" }}
               activeStyle={{ fontWeight: "800" }}
             >
