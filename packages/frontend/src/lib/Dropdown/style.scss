@@ -4,7 +4,12 @@
   position: relative;
   display: inline-block;
   min-width: 160px;
+  box-sizing: border-box;
+  &.fluid {
+    display: block;
+  }
   .header {
+    box-sizing: border-box;
     padding: $space-sm $space-md;
     border: $line-lg solid $blue-color;
     border-radius: $round-md;
@@ -19,7 +24,7 @@
     position: absolute;
 
     margin: 0;
-    padding: $space-sm 0;
+    padding: 0;
     border-radius: $round-md;
     box-sizing: border-box;
     list-style: none;

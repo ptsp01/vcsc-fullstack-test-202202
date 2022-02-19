@@ -43,9 +43,16 @@ function App() {
       <div className="component">
         <Dropdown 
           onSelect={onSelect}
-          label="Survey"
+          // isFluid
+
+          
           header={
-            <Dropdown.Header>
+            <Dropdown.Header style={{
+              backgroundColor: '#761593',
+              width: "100%",
+              color: "white",
+              textAlign: "center"
+            }} >
               {value ? `I want to go to ${value}` : 'Where do you want to travel?'}
             </Dropdown.Header>
           } 
@@ -54,7 +61,9 @@ function App() {
             <Dropdown.Item
               isActive={value === item.value}
               key={index} 
-              value={item.value} 
+              value={item.value}
+              style={{ backgroundColor: "#df94f6", color: "white" }}
+              activeStyle={{ fontWeight: "800" }}
             >
               {item.label}
             </Dropdown.Item>

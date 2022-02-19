@@ -8,7 +8,7 @@ import "./style.scss"
 
 
 
-function Dropdown ({ header, children, onSelect, label }) {
+function Dropdown ({ header, children, onSelect, label, isFluid }) {
   const [isExpand, setExpand] = React.useState(false);
   const dRef = React.useRef();
 
@@ -34,7 +34,7 @@ function Dropdown ({ header, children, onSelect, label }) {
   }, []);
 
   return<DContext.Provider value={{ onSelect }}>
-      <div ref={dRef} className='dropdown' onClick={toggleExpand} >
+      <div ref={dRef} className={`dropdown ${isFluid ? 'fluid' : EMPTY}`} onClick={toggleExpand} >
         { header }
 
         <ul className={`content ${isExpand ? 'expand': EMPTY}`} >
