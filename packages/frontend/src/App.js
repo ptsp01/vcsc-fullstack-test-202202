@@ -44,11 +44,10 @@ function App() {
         <Dropdown 
           onSelect={onSelect}
           // isFluid
-
-          
           header={
             <Dropdown.Header style={{
               backgroundColor: '#761593',
+              borderColor: "#761593",
               width: "100%",
               color: "white",
               textAlign: "center"
@@ -60,7 +59,7 @@ function App() {
           {location.map((item, index) => 
             <Dropdown.Item
               isActive={value === item.value}
-              key={index} 
+              key={item.value} 
               value={item.value}
               style={{ backgroundColor: "#df94f6", color: "white" }}
               activeStyle={{ fontWeight: "800" }}
