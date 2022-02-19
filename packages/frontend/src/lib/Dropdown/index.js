@@ -1,11 +1,12 @@
 import React from "react";
+import { EMPTY } from "../../constant";
 import { DContext } from "./DContext"
 
 import "./style.scss"
 
 
 
-export default function Dropdown ({ header, children, onSelect }) {
+export default function Dropdown ({ header, children, onSelect, label }) {
   const [isExpand, setExpand] = React.useState(false);
   const dRef = React.useRef();
 
@@ -32,9 +33,11 @@ export default function Dropdown ({ header, children, onSelect }) {
 
   return<DContext.Provider value={{ onSelect }}>
       <div ref={dRef} className='dropdown' onClick={toggleExpand} >
+        {label && <label className="label" >{label}</label>}
+
         {header}
 
-        <ul className={`content ${isExpand ? 'expand': ''}`} >
+        <ul className={`content ${isExpand ? 'expand': EMPTY}`} >
           {children}
         </ul>
       </div>

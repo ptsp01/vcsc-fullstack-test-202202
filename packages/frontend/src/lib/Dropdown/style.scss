@@ -4,6 +4,17 @@
   position: relative;
   display: inline-block;
   min-width: 160px;
+  .label {
+    display: block;
+    font-size: $font-sm;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: $space-sm;
+    background-color: $white-color;
+    padding: 0 $space-sm;
+    transform: translate(0, -50%);
+  }
   .header {
     padding: $space-sm $space-md;
     border: $line-lg solid $blue-color;
