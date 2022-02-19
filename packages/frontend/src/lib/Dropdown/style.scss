@@ -19,10 +19,8 @@
   }
   ul.content {
     display: none;
-    width: 100%;
-    top: 100%;
-    position: absolute;
-
+    position: fixed;
+  
     margin: 0;
     padding: 0;
     border-radius: $round-md;
@@ -36,16 +34,16 @@
     &.expand {
       display: block;
     }
-  }
-  li.item {
-    padding: $space-sm $space-md;
-    background-color: $white-color;
-    // color: $white-color;
-    cursor: pointer;
-    &:hover, &.active {
-      background-color: $blue-color;
-      color: $white-color;
-      text-align: center;
+    li.item {
+      padding: $space-sm $space-md;
+      background-color: $white-color;
+      // color: $white-color;
+      cursor: pointer;
+      &:hover, &.active {
+        background-color: $blue-color;
+        color: $white-color;
+        text-align: center;
+      }
     }
   }
 }
