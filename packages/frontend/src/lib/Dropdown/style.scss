@@ -1,0 +1,26 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  min-width: 160px;
+  .header {
+    background-color: aquamarine;
+  }
+  ul.dropdown-content {
+    display: none;
+    width: 100%;
+    top: 100%;
+    position: absolute;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    &.expand {
+      display: block;
+    }
+  }
+}
