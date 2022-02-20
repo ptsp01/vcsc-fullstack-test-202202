@@ -14,7 +14,7 @@ export default function DropdownDocument() {
 
     <li>
       <h5>header: Component</h5>
-      <code>Apply Dropdown.Header or any thing you want!</code>
+      <code>Apply Dropdown.Header or JSX elements you want!</code>
     </li>
 
     <li>

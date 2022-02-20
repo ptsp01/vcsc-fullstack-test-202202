@@ -1,5 +1,5 @@
 import React from "react";
-import DropdownDocument from "./componet/DropdownDocument";
+import DropdownDocument from "./component/DropdownDocument";
 import Dropdown from "./lib/Dropdown";
 import { EMPTY } from "./constant";
 
