@@ -53,6 +53,7 @@ const vehicles = [
 function App() {
   const [destination, setDestination] = React.useState(EMPTY);
   const [vehicle, setVehicle] = React.useState(EMPTY);
+  const destRef = React.useRef();
 
   const onSelectDesti = (item) => {
     setDestination(item.value);
@@ -62,10 +63,17 @@ function App() {
     setVehicle(item.value);
   }
 
+  React.useEffect(() => {
+    destRef.current.toggle();
+  }, [])
+
   return (
     <div className="App" style={{ overflow: "hidden" }}>
       <div className="component">
-        <Dropdown 
+        {/* DESTINATION */}
+        <h5>Choose you destination!</h5>
+        <Dropdown
+          ref={destRef}
           onSelect={onSelectDesti}
           // isFluid
           header={
@@ -95,9 +103,11 @@ function App() {
 
         <br />
         <br />
-        <br />
 
-        <Dropdown 
+        
+        {/* VEHICLE */}
+        <h5>Choose you vehicle!</h5>
+        <Dropdown
           onSelect={onSelectVehicle}
           isFluid
           header={

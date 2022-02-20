@@ -9,14 +9,14 @@ import "./style.scss"
 
 const portalEl = document.querySelector(`#${PORTAL}`);
 
-function Dropdown ({ header, children, onSelect, isFluid }) {
+function Dropdown ({ header, children, onSelect, isFluid }, ref) {
   const [isExpand, setExpand] = React.useState(false);
   const [coordinate, setCoordinate] = React.useState({ top: 0, left: 0, width: 0 })
   const renderEl = React.useRef(document.createElement(`div`));
   const dRef = React.useRef();
 
   const toggleExpand = (val) => {
-    if (typeof val !== "number") {
+    if (typeof val === "undefined") {
       setExpand(!isExpand)
     } else {
       setExpand(Boolean(val))
@@ -35,6 +35,12 @@ function Dropdown ({ header, children, onSelect, isFluid }) {
     { children }
   </ul>;
 
+  React.useImperativeHandle(ref, () => ({
+    toggle() {
+      dRef.current.click();
+    }
+  }))
+
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
     portalEl.appendChild(renderEl.current)
@@ -51,17 +57,18 @@ function Dropdown ({ header, children, onSelect, isFluid }) {
   React.useEffect(() => {
     const _cor = dRef.current.getBoundingClientRect();
     setCoordinate({ top: _cor.bottom, left: _cor.left, width: _cor.width })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header])
 
   return<DContext.Provider value={{ onSelect }}>
-      <div ref={dRef} className={`dropdown ${isFluid ? 'fluid' : EMPTY}`} onClick={toggleExpand} >
+      <div ref={dRef} className={`dropdown ${isFluid ? 'fluid' : EMPTY}`} onClick={() => toggleExpand()} >
         { header }
         { ReactDom.createPortal(dropDownContent, renderEl.current) }
       </div>
     </DContext.Provider>
 }
 
-export default Object.assign(Dropdown, {
+export default Object.assign(React.forwardRef(Dropdown), {
   Header: DHeader,
   Item: DItem
 })

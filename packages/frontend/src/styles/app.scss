@@ -17,6 +17,12 @@
       width: 50%;
     }
   }
+  .component {
+    h5 {
+      margin-top: 0;
+      margin-bottom: $space-md;
+    }
+  }
   .document {
     h3 {
       margin: 0;
