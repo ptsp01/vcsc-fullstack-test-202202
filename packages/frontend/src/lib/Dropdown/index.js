@@ -62,7 +62,7 @@ function Dropdown ({ header, children, onSelect, isFluid }, ref) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header])
 
-  return<DContext.Provider value={{ onSelect }}>
+  return <DContext.Provider value={{ onSelect }}>
       <div ref={dRef} className={`dropdown ${isFluid ? 'fluid' : EMPTY}`} onClick={() => toggleExpand()} >
         { header }
         { ReactDom.createPortal(dropDownContent, renderEl.current) }
