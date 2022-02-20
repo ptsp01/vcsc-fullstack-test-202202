@@ -40,7 +40,7 @@ result = [
  '1331': '100'}
 ]
 
-test("should read file properly", async () => {
-    const data = await decodeMsg()
+test("should read file properly", () => {
+    const data = decodeMsg()
     expect(data).toEqual(result)
 })

@@ -17,7 +17,7 @@ const isStartNewMessage = (p1 = EMPTY, p2 = EMPTY) => {
     return p1.charAt(0) === TAG_BEGIN && p2.charAt(0) === TAG_LENGTH;
 }
 
-async function decodeMsg() {
+function decodeMsg() {
     const results = [];
     const obj = new Map();
     try {
