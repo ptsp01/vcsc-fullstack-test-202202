@@ -31,9 +31,11 @@ function Dropdown ({ header, children, onSelect, isFluid }, ref) {
     }
   }
 
-  const dropDownContent = <ul style={{...coordinate}} className={`content ${isExpand ? 'expand': EMPTY}`} >
+  const dropDownContent = React.useMemo(() => {
+    return <ul style={{...coordinate}} className={`content ${isExpand ? 'expand': EMPTY}`} >
     { children }
-  </ul>;
+  </ul>
+  }, [coordinate, isExpand, children])
 
   React.useImperativeHandle(ref, () => ({
     toggle() {
@@ -55,7 +57,7 @@ function Dropdown ({ header, children, onSelect, isFluid }, ref) {
   }, []);
 
   React.useEffect(() => {
-    const _cor = dRef.current.getBoundingClientRect();
+    const _cor = dRef.current?.getBoundingClientRect() || {};
     setCoordinate({ top: _cor.bottom, left: _cor.left, width: _cor.width })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header])
