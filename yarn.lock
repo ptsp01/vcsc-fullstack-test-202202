@@ -2705,6 +2705,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@vcsc-test/frontend@workspace:packages/frontend":
+  version: 0.0.0-use.local
+  resolution: "@vcsc-test/frontend@workspace:packages/frontend"
+  dependencies:
+    react: 17.0.2
+    react-dom: 17.0.2
+    react-scripts: 5.0.0
+    sass: 1.49.8
+  languageName: unknown
+  linkType: soft
+
 "@webassemblyjs/ast@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/ast@npm:1.11.1"
@@ -8072,17 +8083,6 @@ __metadata:
   checksum: f515b49ca964429ab48a4ac8041fcf969c927aeb49ab65288bd982e52c849a870fc3b03565780b0d194a1a02da8821f28b6425e48e95b8107bc9fcc92f571a6f
   languageName: node
   linkType: hard
-
-"my-app@workspace:packages/frontend":
-  version: 0.0.0-use.local
-  resolution: "my-app@workspace:packages/frontend"
-  dependencies:
-    react: 17.0.2
-    react-dom: 17.0.2
-    react-scripts: 5.0.0
-    sass: 1.49.8
-  languageName: unknown
-  linkType: soft
 
 "nanoid@npm:^3.2.0":
   version: 3.3.1

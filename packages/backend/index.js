@@ -13,32 +13,46 @@ const isValidPack = (pack = EMPTY) => {
     return Boolean(key && value);
 }
 
-const isStartNewMessage = (p1 = EMPTY, p2 = EMPTY) => {
-    return p1.charAt(0) === TAG_BEGIN && p2.charAt(0) === TAG_LENGTH;
-}
+const isTagBegin = (p = EMPTY) => p.split(EQUAL_SIGN)[0] === TAG_BEGIN;
+
+const isTagLength = (p = EMPTY) => p.split(EQUAL_SIGN)[0] === TAG_LENGTH;
 
 function decodeMsg() {
     const results = [];
     const obj = new Map();
+    let maxLength = 0;
+    let count = 0;
     try {
         const data = fs.readFileSync(file, ASCII);
-        const array = data?.split(SOH).filter(pack => isValidPack(pack))
+        const array = data?.split(SOH).filter(pack => isValidPack(pack));
 
         array.forEach((pack, index) => {
-            if (isStartNewMessage(pack, array[index + 1])) {
+            // Start new message:
+            if (isTagBegin(pack) && isTagLength(array[index + 1])) {
                 // Add obj into results if it is not empty
-                // Reset obj and start new message:
                 if (obj.size) {
-                    results.push(Object.fromEntries(obj))
+                    results.push(Object.fromEntries(obj));
                 }
 
-                obj.clear()
+                // Reset obj and start new message:
+                obj.clear();
+                maxLength = Number(array[index + 1].split(EQUAL_SIGN)[1]);
+                count = 0;
             }
+
             // save data into obj:
-            const [key, value] = pack.split(EQUAL_SIGN);
-            obj.set(key, value);
+            if (count < maxLength) {
+                const [key, value] = pack.split(EQUAL_SIGN);
+                obj.set(key, value);
+            }
+
+            // update count:
+            if (!isTagBegin(pack) && !isTagLength(pack)) {
+                count += (pack.length + 1); // +1 <DELIMITER> character.
+            }
             
-            // add obj into result and finish extract data:
+            // if this is last item
+            // we push the current obj into results and finish extracting data:
             const isLastItem = index === array.length - 1;
             if (isLastItem) {
                 results.push(Object.fromEntries(obj));
