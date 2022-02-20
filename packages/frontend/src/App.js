@@ -31,18 +31,42 @@ const location = [
   },
 ]
 
-function App() {
-  const [value, setValue] = React.useState(EMPTY);
+const vehicles = [
+  {
+    label: 'Taxi',
+    value: 'taxi',
+  },
+  {
+    label: 'Police car',
+    value: 'police-car',
+  },
+  {
+    label: 'Ambulance',
+    value: 'ambulance',
+  },
+  {
+    label: 'Bicycle',
+    value: 'bicycle',
+  }
+]
 
-  const onSelect = (item) => {
-    setValue(item.value);
+function App() {
+  const [destination, setDestination] = React.useState(EMPTY);
+  const [vehicle, setVehicle] = React.useState(EMPTY);
+
+  const onSelectDesti = (item) => {
+    setDestination(item.value);
+  }
+
+  const onSelectVehicle = (item) => {
+    setVehicle(item.value);
   }
 
   return (
     <div className="App" style={{ overflow: "hidden" }}>
       <div className="component">
         <Dropdown 
-          onSelect={onSelect}
+          onSelect={onSelectDesti}
           // isFluid
           header={
             <Dropdown.Header style={{
@@ -52,13 +76,13 @@ function App() {
               color: "white",
               textAlign: "center"
             }} >
-              {value ? `I want to go to ${value}` : 'Where do you want to travel?'}
+              {destination ? `I want to go to ${destination}` : 'Where do you want to travel?'}
             </Dropdown.Header>
           } 
         >
           {location.map((item, index) => 
             <Dropdown.Item
-              isActive={value === item.value}
+              isActive={destination === item.value}
               key={item.value} 
               item={item}
               style={{ backgroundColor: "#df94f6", color: "white" }}
@@ -74,27 +98,19 @@ function App() {
         <br />
 
         <Dropdown 
-          onSelect={onSelect}
-          // isFluid
+          onSelect={onSelectVehicle}
+          isFluid
           header={
-            <Dropdown.Header style={{
-              backgroundColor: '#761593',
-              borderColor: "#761593",
-              width: "100%",
-              color: "white",
-              textAlign: "center"
-            }} >
-              {value ? `I want to go to ${value}` : 'Where do you want to travel?'}
+            <Dropdown.Header style={{ textAlign: "center" }} >
+              {vehicle ? `By ${vehicle}` : 'Why kind of transportation do you want to travel?'}
             </Dropdown.Header>
           } 
         >
-          {location.map((item, index) => 
+          {vehicles.map((item) => 
             <Dropdown.Item
-              isActive={value === item.value}
+              isActive={vehicle === item.value}
               key={item.value} 
               item={item}
-              style={{ backgroundColor: "#df94f6", color: "white" }}
-              activeStyle={{ fontWeight: "800" }}
             >
               {item.label}
             </Dropdown.Item>
