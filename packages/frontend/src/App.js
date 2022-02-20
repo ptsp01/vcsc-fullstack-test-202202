@@ -1,4 +1,5 @@
 import React from "react";
+import DropdownDocument from "./componet/DropdownDocument";
 import { EMPTY } from "./constant";
 import Dropdown from "./lib/Dropdown";
 
@@ -6,32 +7,24 @@ import "./styles/app.scss"
 
 const location = [
   {
+    label: "No select",
+    value: EMPTY
+  },
+  {
     label: 'New York',
     value: 'newYork',
-  },
-  {
-    label: 'Dublin',
-    value: 'dublin',
-  },
-  {
-    label: 'Istanbul',
-    value: 'istanbul',
   },
   {
     label: 'California',
     value: 'colifornia',
   },
-  {
-    label: 'Izmir',
-    value: 'izmir',
-  },
-  {
-    label: 'Oslo',
-    value: 'oslo',
-  },
 ]
 
 const vehicles = [
+  {
+    label: "No select",
+    value: EMPTY
+  },
   {
     label: 'Taxi',
     value: 'taxi',
@@ -64,7 +57,8 @@ function App() {
   }
 
   React.useEffect(() => {
-    destRef.current.toggle();
+    // destRef.current.toggle();
+    console.log(destRef.current);
   }, [])
 
   return (
@@ -127,10 +121,7 @@ function App() {
           )}
         </Dropdown>
       </div>
-
-      <div className="document" >
-        <h3>Dropdown component</h3>
-      </div>
+      <DropdownDocument />
     </div>
   );
 }

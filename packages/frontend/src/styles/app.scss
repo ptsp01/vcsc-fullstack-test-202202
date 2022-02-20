@@ -24,9 +24,22 @@
     }
   }
   .document {
+    padding-left: $space-md;
+    box-sizing: border-box;
     h3 {
       margin: 0;
-      text-align: center;
+      // text-align: center;
+    }
+    ul {
+      li {
+        margin-bottom: $space-sm;
+        span {
+          font-size: $font-sm;
+        }
+      }
+      h5 {
+        margin: 0;
+      }
     }
   }
 }
