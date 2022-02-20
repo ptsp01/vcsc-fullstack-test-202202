@@ -68,7 +68,40 @@ function App() {
             </Dropdown.Item>
           )}
         </Dropdown>
+
+        <br />
+        <br />
+        <br />
+
+        <Dropdown 
+          onSelect={onSelect}
+          // isFluid
+          header={
+            <Dropdown.Header style={{
+              backgroundColor: '#761593',
+              borderColor: "#761593",
+              width: "100%",
+              color: "white",
+              textAlign: "center"
+            }} >
+              {value ? `I want to go to ${value}` : 'Where do you want to travel?'}
+            </Dropdown.Header>
+          } 
+        >
+          {location.map((item, index) => 
+            <Dropdown.Item
+              isActive={value === item.value}
+              key={item.value} 
+              item={item}
+              style={{ backgroundColor: "#df94f6", color: "white" }}
+              activeStyle={{ fontWeight: "800" }}
+            >
+              {item.label}
+            </Dropdown.Item>
+          )}
+        </Dropdown>
       </div>
+
       <div className="document" >
         <h3>Dropdown component</h3>
       </div>

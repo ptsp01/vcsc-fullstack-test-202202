@@ -7,12 +7,12 @@ import { DContext } from "./DContext"
 
 import "./style.scss"
 
+const portalEl = document.querySelector(`#${PORTAL}`);
+
 function Dropdown ({ header, children, onSelect, isFluid }) {
   const [isExpand, setExpand] = React.useState(false);
   const [coordinate, setCoordinate] = React.useState({ top: 0, left: 0, width: 0 })
-  const portalEl = document.querySelector(`#${PORTAL}`);
-  const renderEl = React.useRef(document.createElement(`div`))
-
+  const renderEl = React.useRef(document.createElement(`div`));
   const dRef = React.useRef();
 
   const toggleExpand = (val) => {
@@ -38,8 +38,9 @@ function Dropdown ({ header, children, onSelect, isFluid }) {
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
     portalEl.appendChild(renderEl.current)
-    renderEl.current.classList.add("dropdown")
+    renderEl.current?.classList?.add("dropdown")
     const _renderEl = renderEl.current;
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       portalEl.removeChild(_renderEl)
