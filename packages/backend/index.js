@@ -88,7 +88,6 @@ function decodeMsg() {
         if (isStartMessage) {
             if (messageLengthLimit == 0) {
                 if (lengthMessageRegex.test(dataLine)) {
-                    messageLengthCurrent += DELIMITER_STRING.length;
                     messageBody[keyValue.key] = keyValue.value;
                     if (messageBody[tagMessageLength] === null || messageBody[tagMessageLength] === undefined) {
                         resetToDefaultValue();
@@ -125,5 +124,4 @@ function decodeMsg() {
     }
     return result;
 }
-
 module.exports = decodeMsg
