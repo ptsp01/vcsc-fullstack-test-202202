@@ -122,3 +122,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#node module frontend
+/packages/frontend/dropdown-app/node_modules
