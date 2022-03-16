@@ -39,25 +39,16 @@ const dataSample = [
   {_id: 9, _s: 'Stock 10', _m: 'VN'},
   {_id: 10, _s: 'Stock 11', _m: 'HOSE'},
   {_id: 11, _s: 'Stock 12', _m: 'HOSE'},
+  {_id: 12, _s: 'Stock 13', _m: 'HOSE'},
+  {_id: 13, _s: 'Stock 14', _m: 'HOSE'},
+  {_id: 14, _s: 'Stock 15', _m: 'HOSE'},
+  {_id: 15, _s: 'Stock 16', _m: 'HOSE'},
 ]
 
 function App() {
 
   const [_isVisible, setVisible] = useState(false)
-  const wrapperRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setVisible(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [wrapperRef]);
-
+ 
   const getStockHose = useMemo(()=>{
     const hoseTmp = (dataSample || []).filter(item => item._m === 'HOSE')
     return hoseTmp;
@@ -67,20 +58,31 @@ function App() {
     setVisible(!_isVisible)
   }
 
+  const _onChange = (value)=>{
+    console.log(value, " value")
+    setVisible(false)
+  }
+
+  const onCloseDropDown =()=>{
+    setVisible(false)
+  }
+
   return (
     <>
       <Wrapper className="main-component__dropdown">
         <div className="wrap-container">
-          <div ref={wrapperRef}>
-            <Button onClick={openDropDown}>
-              Click to open dropdown
-            </Button>
-            <DropDown
-              isVisible={_isVisible}
-              setVisible={setVisible}
-              data={getStockHose}
-            />
-          </div>
+          <Button onClick={openDropDown}>
+            Click to open dropdown
+          </Button>
+          <DropDown
+            isVisible={_isVisible}
+            data={getStockHose}
+            onChange={_onChange}
+            isClose={true}
+            onClose={onCloseDropDown}
+            className="custom-dropdown"
+            classItem="custom-dropdown-item"
+          />
          
           <div className="box-stock">
             <TextAll>DANH SÁCH CỔ PHIẾU</TextAll>
