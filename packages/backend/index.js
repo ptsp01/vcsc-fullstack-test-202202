@@ -4,10 +4,11 @@
  * Improvement: synchronous file reading
 */
 const fs =  require('fs')
+const path = require('path')
 
 function readDataSync(filename){
   try{
-    const data = fs.readFileSync(filename, "utf8")
+    const data = fs.readFileSync(path.resolve(__dirname,filename), "utf8")
     return data
   }catch(err){
     throw err
@@ -53,7 +54,7 @@ function decoding(data, startTag, startCode, soh){
 
 function decodeMsg() {
     // Your code here
-  const filename = "./data.tcp"
+  const filename = "data.tcp"
   const soh = "\x01"
   const startTag = "8="
   const startCode = "HNX.TDS.1"  

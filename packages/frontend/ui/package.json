@@ -1,0 +1,15 @@
+{
+  "name": "@vcsc-test/ui",
+  "packageManager": "yarn@3.1.1",
+  "main": "./lib/index.js",
+  "devDependencies": {
+    "@types/react": "^17.0.40",
+    "react": "^17.0.2",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  }
+}

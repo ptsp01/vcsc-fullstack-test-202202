@@ -2,13 +2,19 @@
   "name": "vcsc-fullstack-test-202202",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/**"
   ],
   "packageManager": "yarn@3.1.1",
   "dependencies": {
-    "jest": "^27.5.1"
+    "concurrently": "^7.0.0",
+    "jest": "^27.5.1",
+    "sass": "^1.49.9",
+    "styled-components": "^5.3.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "yarn workspace @vcsc-test/app-demo start",
+    "ui:dev": "yarn workspace @vcsc-test/ui dev",
+    "start": "concurrently --kill-others \"yarn ui:dev\" \"yarn dev\""
   }
 }

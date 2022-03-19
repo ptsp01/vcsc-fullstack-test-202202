@@ -1,0 +1,39 @@
+.dropdown-btn {
+  padding: 1rem;
+  background: $white;
+  .dropdown-btn-cursor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+  div, p {
+    margin: 0;
+  }
+}
+
+.dropdown-container {
+  width: auto;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: $blue_200;
+  padding: 1rem 0;
+  position: absolute;
+}
+.dropdown-item {
+  padding:0.2rem 1rem;
+  cursor: pointer;
+  &.active {
+    background: $light_blue_2;
+    color: $blue_200;
+  }
+  &:hover {
+    background: $light_blue_2;
+    color: $blue_200; 
+  }
+}
