@@ -1,0 +1,54 @@
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    float: right;
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  
+  .ddWrapper {
+    padding: 5;
+    position: relative;
+    display: inline-block;
+  }
+
+  .ddHeader {
+      min-width: 160px;
+  }
+
+  .ddHeaderTitle {
+    min-width: 150px;
+    display: inline-block;
+  }
+
+  .ddList {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 5px 5px;
+    z-index: 1;
+  }
+
+  .ddList button {
+    display: block;
+    min-width: 160px;
+  }
+  
+  .ddListItem {
+    padding: 5;
+  }
+  
+  .activeItem {
+    background-color: red;
+  }
