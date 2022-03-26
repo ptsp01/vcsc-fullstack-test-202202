@@ -9,6 +9,8 @@
     "jest": "^27.5.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start:frontend": "yarn workspace @vcsc-test/frontend start",
+    "build:frontend": "yarn workspace @vcsc-test/frontend build"
   }
 }
