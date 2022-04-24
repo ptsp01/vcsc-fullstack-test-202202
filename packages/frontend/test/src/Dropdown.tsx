@@ -84,15 +84,12 @@ export const Dropdown = (props: DropdownProps) => {
         return () => document.removeEventListener('click', onClickOustsideHandler)
     }, [])
 
-    console.log(isCollapsed)
-    console.log(maxHeight)
     return <div data-testid="dropdown" className={ styles.container }>
         <div className={ styles.selected_display } data-testid="selected-display" style={{
             ...props.selectedDisplayStyles,
             position: 'relative',
             display: 'flex',
         }} onClick={(event) => {
-            console.log('clicked')
             setIsCollapsed(!isCollapsed)
             event.stopPropagation()
         }}>
