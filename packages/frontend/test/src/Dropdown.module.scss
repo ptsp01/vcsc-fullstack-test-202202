@@ -1,0 +1,33 @@
+.select {
+    transition: max-height 0.2s;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    display: block;
+}
+
+.selected_display {
+    border: 1px solid black;
+}
+
+.selected_display_value {
+    flex-grow: 1;
+}
+
+.chevron_right {
+    position: absolute;
+    right: 0px;
+    transform: translate(-100%, -10%);
+}
+
+.chevron_down {
+    position: absolute;
+    right: 0px;
+    bottom: 25%;
+}
+
+.active {
+    background-color: #338FFF;
+}
