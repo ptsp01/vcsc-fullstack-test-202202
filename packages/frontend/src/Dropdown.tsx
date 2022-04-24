@@ -17,23 +17,25 @@ interface DropdownItemProps {
 }
 
 const DropdownItem : (props: DropdownItemProps)=>React.ReactElement = (props: DropdownItemProps) => {
+    const {isActive, value, renderer, activeRenderer} = props 
+    
     let render = useMemo<React.ReactElement>(() => {
-        if (props.renderer) {
-            return props.renderer(props.value)
+        if (renderer) {
+            return renderer(value)
         } else {
-            return <React.Fragment>{props.value}</React.Fragment>
+            return <React.Fragment>{value}</React.Fragment>
         }
-    }, [props.value, props.renderer])
+    }, [value, renderer])
 
     let activeRender = useMemo<React.ReactElement>(() => {
-        if (props.activeRenderer) {
-            return props.activeRenderer(props.value)
+        if (activeRenderer) {
+            return activeRenderer(value)
         } else {
-            return <React.Fragment>{props.value}</React.Fragment>
+            return <React.Fragment>{value}</React.Fragment>
         }
-    }, [props.value, props.activeRenderer])
+    }, [value, activeRenderer])
 
-    if (props.isActive) {
+    if (isActive) {
         return activeRender
     }  else {
         return render
