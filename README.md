@@ -49,3 +49,6 @@ For example: `"8=FIX4.4<DELIMITER>9=4<DELIMITER>35=A"` will return
 ```
 
 You can test your implementation by running `yarn test` in project root
+
+## Note
+I have put additional README inside the packages/backend and packages/frontend folders
