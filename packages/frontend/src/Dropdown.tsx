@@ -1,12 +1,43 @@
-import React, { createRef, useEffect, useRef, useState } from "react"
+import React, { createRef, useEffect, useMemo, useState } from "react"
 import styles from './Dropdown.module.scss'
 
 export interface Renderer {
-    (iNode: string | number): React.ReactNode
+    (iNode: string | number): React.ReactElement
 }
 
 export interface Style {
     [index:string]: string
+}
+
+interface DropdownItemProps {
+    isActive: boolean,
+    value: string | number,
+    renderer?: Renderer,
+    activeRenderer?: Renderer,
+}
+
+const DropdownItem : (props: DropdownItemProps)=>React.ReactElement = (props: DropdownItemProps) => {
+    let render = useMemo<React.ReactElement>(() => {
+        if (props.renderer) {
+            return props.renderer(props.value)
+        } else {
+            return <React.Fragment>{props.value}</React.Fragment>
+        }
+    }, [props.value, props.renderer])
+
+    let activeRender = useMemo<React.ReactElement>(() => {
+        if (props.activeRenderer) {
+            return props.activeRenderer(props.value)
+        } else {
+            return <React.Fragment>{props.value}</React.Fragment>
+        }
+    }, [props.value, props.activeRenderer])
+
+    if (props.isActive) {
+        return activeRender
+    }  else {
+        return render
+    }
 }
 
 export interface DropdownProps {
@@ -46,19 +77,14 @@ export const Dropdown = (props: DropdownProps) => {
             let ret: React.ReactNode[] = []
             let i = 0
             for (let child of props.values) {
-                if (i !== props.activeIndex) {
-                    if (props.renderer) {
-                        ret.push(<button onClick={ onButtonClickGenerator(i) } className={ styles.button } key={i} ref={childrenRefs[i]}>{props.renderer(child)}</button>)
-                    } else {
-                        ret.push(<button onClick={ onButtonClickGenerator(i) } className={ styles.button } key={i} ref={childrenRefs[i]}>{child}</button>)
-                    }
-                } else {
-                    if (props.activeRenderer) {
-                        ret.push(<button onClick={ onButtonClickGenerator(i) } className={ styles.button } key={i} ref={childrenRefs[i]}>{ props.activeRenderer(child) }</button>)
-                    } else {
-                        ret.push(<button onClick={ onButtonClickGenerator(i) } className={ styles.button + ' ' + styles.active } key={i} ref={childrenRefs[i]}>{child}</button>)
-                    }
-                }
+                ret.push(<button onClick={ onButtonClickGenerator(i) } className={ styles.button } key={i} ref={childrenRefs[i]}>
+                    <DropdownItem
+                        renderer={props.renderer}
+                        activeRenderer={props.activeRenderer}
+                        value={child}
+                        isActive={i === props.activeIndex}
+                    ></DropdownItem>
+                </button>)
                 i++
             }
             return ret

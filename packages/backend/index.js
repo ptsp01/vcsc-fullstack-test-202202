@@ -201,7 +201,6 @@ function decodeMsg(fileName) {
         state = parse(val, state)
     }
 
-    console.log(state)
     return state.messages
 }
 
