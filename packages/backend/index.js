@@ -39,66 +39,124 @@ const initialState = {
     bodyCharCount: 0,
 }
 
-function parse(val, state) {
-    if (state.messageState === MESSAGE_STATE.START) {
-        if (state.packetState === PACKET_STATE.TAG) {
-            if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
-                return {
-                    ...state,
-                    wip: [],
-                    packetState: PACKET_STATE.VAL
+function startState(val, state) {
+    if (state.packetState === PACKET_STATE.TAG) {
+        if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
+            return {
+                ...state,
+                wip: [],
+                packetState: PACKET_STATE.VAL
+            }
+        } 
+        return {
+            ...state,
+            wip: [...state.wip, val]
+        }
+    } else {
+        if (val === '='.charCodeAt(0) && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
+            return {
+                ...state,
+                wip: [],
+            }
+        } else if (val === 1) {
+            return {
+                ...state,
+                wip: [],
+                packetState: PACKET_STATE.TAG,
+                messageState: MESSAGE_STATE.LENGTH,
+                message: {
+                    8: String.fromCharCode(...state.wip)
                 }
-            } 
+            }
+        } else {
             return {
                 ...state,
                 wip: [...state.wip, val]
-            }
-        } else {
-            if (val === '='.charCodeAt(0) && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
-                return {
-                    ...state,
-                    wip: [],
-                }
-            } else if (val === 1) {
-                return {
-                    ...state,
-                    wip: [],
-                    packetState: PACKET_STATE.TAG,
-                    messageState: MESSAGE_STATE.LENGTH,
-                    message: {
-                        8: String.fromCharCode(...state.wip)
-                    }
-                }
-            } else {
-                return {
-                    ...state,
-                    wip: [...state.wip, val]
-                }
             }
         }
-    } else if (state.messageState === MESSAGE_STATE.LENGTH) {
-        if (state.packetState === PACKET_STATE.TAG) {
-            if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
-                return {
-                    ...state,
-                    wip: [],
-                    messageState: MESSAGE_STATE.START,
-                    packetState: PACKET_STATE.VAL
-                }
-            } else if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '9'.charCodeAt(0)) {
-                return {
-                    ...state,
-                    wip: [],
-                    packetState: PACKET_STATE.VAL
-                }
-            } 
+    }
+}
+
+function lengthState(val, state) {
+    if (state.packetState === PACKET_STATE.TAG) {
+        if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '8'.charCodeAt(0)) {
+            return {
+                ...state,
+                wip: [],
+                messageState: MESSAGE_STATE.START,
+                packetState: PACKET_STATE.VAL
+            }
+        } else if (val === '='.charCodeAt(0)  && state.wip.length > 0 && state.wip[state.wip.length - 1] === '9'.charCodeAt(0)) {
+            return {
+                ...state,
+                wip: [],
+                packetState: PACKET_STATE.VAL
+            }
+        } 
+        return {
+            ...state,
+            wip: [...state.wip, val]
+        }
+    } else {
+        if (val === 1) {
+            length = parseInt(String.fromCharCode(...state.wip))
+            ret = {
+                ...state,
+                wip: [],
+                packetState: PACKET_STATE.TAG,
+                messageState: MESSAGE_STATE.BODY,
+                message: {
+                    ...state.message,
+                    9: String.fromCharCode(...state.wip),
+                },
+                messageBodyLength: length,
+                bodyCharCount: 0,
+            }
+            
+            return ret
+        } else {
             return {
                 ...state,
                 wip: [...state.wip, val]
             }
-        } else {
-            if (val === 1) {
-                length = parseInt(String.fromCharCode(...state.wip))
+        }
+    }
+}
+
+function bodyState(val, state) {
+    if (state.packetState === PACKET_STATE.TAG) {
+        if (val === '='.charCodeAt(0) && state.wip.length > 0) {
+            ret = {
+                ...state,
+                wip: [],
+                packetState: PACKET_STATE.VAL,
+                currentTag: String.fromCharCode(...state.wip),
+                bodyCharCount: state.bodyCharCount + 1,
+            }
+
+            return ret
+        } 
+        return {
+            ...state,
+            wip: [...state.wip, val],
+            bodyCharCount: state.bodyCharCount + 1,
+        }
+    } else {
+        if (val === 1) {
+            ret = {}
+
+            if (state.bodyCharCount + 1 === state.messageBodyLength) {
+                /// the end
+                message = {
+                    ...state.message,
+                    [state.currentTag]: String.fromCharCode(...state.wip)
+                }
+
+                ret = {
+                    ...initialState,
+                    messages: [...state.messages, message],
+                }
+            } else {
                 ret = {
                     ...state,
                     wip: [],
@@ -106,77 +164,31 @@ function parse(val, state) {
                     messageState: MESSAGE_STATE.BODY,
                     message: {
                         ...state.message,
-                        9: String.fromCharCode(...state.wip),
+                        [state.currentTag]: String.fromCharCode(...state.wip)
                     },
-                    messageBodyLength: length,
-                    bodyCharCount: 0,
-                }
-                
-                return ret
-            } else {
-                return {
-                    ...state,
-                    wip: [...state.wip, val]
-                }
-            }
-        }
-    } else if (state.messageState === MESSAGE_STATE.BODY) {
-        if (state.packetState === PACKET_STATE.TAG) {
-            if (val === '='.charCodeAt(0) && state.wip.length > 0) {
-                ret = {
-                    ...state,
-                    wip: [],
-                    packetState: PACKET_STATE.VAL,
-                    currentTag: String.fromCharCode(...state.wip),
+                    currentTag: "",
                     bodyCharCount: state.bodyCharCount + 1,
                 }
-
-                return ret
-            } 
+            }
+            
+            return ret
+        } else {
             return {
                 ...state,
                 wip: [...state.wip, val],
                 bodyCharCount: state.bodyCharCount + 1,
             }
-        } else {
-            if (val === 1) {
-                ret = {}
-
-                if (state.bodyCharCount + 1 === state.messageBodyLength) {
-                    /// the end
-                    message = {
-                        ...state.message,
-                        [state.currentTag]: String.fromCharCode(...state.wip)
-                    }
-
-                    ret = {
-                        ...initialState,
-                        messages: [...state.messages, message],
-                    }
-                } else {
-                    ret = {
-                        ...state,
-                        wip: [],
-                        packetState: PACKET_STATE.TAG,
-                        messageState: MESSAGE_STATE.BODY,
-                        message: {
-                            ...state.message,
-                            [state.currentTag]: String.fromCharCode(...state.wip)
-                        },
-                        currentTag: "",
-                        bodyCharCount: state.bodyCharCount + 1,
-                    }
-                }
-                
-                return ret
-            } else {
-                return {
-                    ...state,
-                    wip: [...state.wip, val],
-                    bodyCharCount: state.bodyCharCount + 1,
-                }
-            }
         }
+    }
+}
+
+function parse(val, state) {
+    if (state.messageState === MESSAGE_STATE.START) {
+        return startState(val, state)
+    } else if (state.messageState === MESSAGE_STATE.LENGTH) {
+        return lengthState(val, state)
+    } else if (state.messageState === MESSAGE_STATE.BODY) {
+        return bodyState(val, state)
     }
 
     return state
