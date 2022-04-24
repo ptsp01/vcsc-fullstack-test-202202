@@ -25,7 +25,6 @@ export const Dropdown = (props: DropdownProps) => {
     let [isCollapsed, setIsCollapsed] = useState(true)
     let [maxHeight, setMaxHeight] = useState<number>(0)
     let [childrenRefs, setChildrenRefs] = useState<React.RefObject<HTMLButtonElement>[]>([])
-    const elementsRef = useRef(Array.isArray(props.values)? props.values.map(() => createRef()) : createRef());
 
     useEffect(() => {
         let newRefs = []
