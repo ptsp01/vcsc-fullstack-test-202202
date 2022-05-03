@@ -2,7 +2,7 @@ function decodeMsg() {
     // Your code here
     const fs = require('fs')
     const fileName = "./packages/backend/data.tcp"
-    let file = fs.readFileSync(fileName, { encoding: 'ascii' })
+    let file = fs.readFileSync(fileName, { encoding: 'utf-8' })
     const regex = /([a-zA-Z0-9!@#$&()`.+,/:"_-]+)=([a-zA-Z0-9!@#$&()`.+,/:"_-]+)/g
     const dataArr = [...file.matchAll(regex)]
     const resultMsg = []
