@@ -13,7 +13,7 @@ function decodeMsg() {
     const messageLength = [0, 0]; //[calculating length, max length]
 
     for (const match of matches) {
-        const [, fullContent, key, value] = match;
+        const [fullContent, , key, value] = match;
         switch (key) {
             case '8':
                 decodedMsg.push({});
@@ -23,7 +23,7 @@ function decodeMsg() {
                 messageLength[1] = +value;
                 break;
             default:
-                messageLength[0] += fullContent.length + 1; //+1 for 
+                messageLength[0] += fullContent.length;
                 if (messageLength[0] > messageLength[1])
                     continue;
         }
