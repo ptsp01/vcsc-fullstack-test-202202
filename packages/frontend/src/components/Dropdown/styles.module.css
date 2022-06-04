@@ -1,0 +1,22 @@
+.dropdown {
+  & {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    box-sizing: border-box;
+  }
+}
+
+.dropdown-disabled {
+  & > .dropdown-label {
+    background-color: var(--background-disabled-color);
+    border: 1px solid var(--border-disabled-color);
+    color: var(--text-disabled-color);
+    cursor: default;
+  }
+  &:hover > .dropdown-label {
+    background-color: var(--background-disabled-color);
+    border: 1px solid var(--border-disabled-color);
+    color: var(--text-disabled-color);
+  }
+}
