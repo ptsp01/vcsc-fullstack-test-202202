@@ -1,0 +1,50 @@
+html {
+  font-family: var(--font-family);
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: var(--font-lineheight);
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size:10px;
+}
+
+body{
+  margin:0;
+}
+
+input[readonly] {
+  cursor: default;
+}
+a {
+  text-decoration: none;
+}
+
+[data-placeholder]:empty:before{
+  content: attr(data-placeholder);
+  color: #888;
+}
+th{
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 768px) {
+  section {
+    & > * {
+      margin: auto;
+      max-width: 95%;
+      width: var(--main-width);
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  section {
+    & > * {
+      margin: auto;
+      max-width: 95%;
+    }
+  }
+}

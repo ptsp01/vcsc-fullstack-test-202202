@@ -3,7 +3,8 @@
 .vscode
 
 # Below is a copy of https://github.com/github/gitignore/blob/HEAD/Node.gitignore
-
+.yarn
+yarn.lock
 # Logs
 logs
 *.log
